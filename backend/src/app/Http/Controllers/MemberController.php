@@ -17,7 +17,8 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+    $members = Member::paginate(10); // Modifica il numero per adattarlo alle tue esigenze
+    return response()->json($members);
     }
 
     /**
@@ -27,7 +28,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+ 
     }
 
     /**
@@ -50,17 +51,15 @@ class MemberController extends Controller
         Log::info('Request is validated');
 
         if ($validator->fails()) {
-            // Restituisci un codice di stato 422 o 400 con il messaggio di errore.
-            return response()->json(['errors' => $validator->errors()], 422); // o 400 a seconda delle tue esigenze
+            return response()->json(['errors' => $validator->errors()], 400);
         }
     
         $member = Member::create($validator->validated());
 
         Log::info('Member created successfully', ['member' => $member]);
 
-        // Ritorna la risposta JSON con il membro appena creato e status code 201
-        return response()->json(['message' => 'Member created successfully!', 'member' => $member], 201);
 
+        return response()->json(['message' => 'Member created successfully!', 'member' => $member], 201);
     }
 
     /**
@@ -69,9 +68,9 @@ class MemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Member $member)
     {
-        //
+        return response()->json($member);
     }
 
     /**
