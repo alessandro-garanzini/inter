@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 use App\Http\Requests\MemberPostRequest;
+use App\Http\Requests\MemberUpdateRequest;
 use App\Models\Member;
 
 class MemberController extends Controller
@@ -40,11 +41,8 @@ class MemberController extends Controller
      */
     public function store(MemberPostRequest $request)
     {
-    
         $valdidated_request = $request->validated();
         
-        Log::info('Validated request', ['validated_request' => $valdidated_request]);
-
         $member = Member::create($valdidated_request);
 
         Log::info('Member created successfully', ['member' => $member]);
@@ -77,13 +75,16 @@ class MemberController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\MemberUpdateRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(MemberUpdateRequest $request, $id)
     {
-        //
+        $member = Member::findOrFail($id);
+        $member->update($request->validated());
+    
+        return response()->json(['message' => 'Member updated successfully', 'member' => $member]);    
     }
 
     /**
