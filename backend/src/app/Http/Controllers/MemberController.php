@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Member;
-use Illuminate\Support\Facades\Log; // Importa il facade Log
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
+use App\Http\Requests\MemberPostRequest;
+use App\Models\Member;
 
 class MemberController extends Controller
 {
@@ -34,30 +35,19 @@ class MemberController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\MemberPostRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MemberPostRequest $request)
     {
-        Log::info('Hello');
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|max:255',
-            'email' => 'required|email|unique:members,email',
-            'birthdate' => 'required|date',
-            'role' => 'required|max:255',
-        ]);
-
-        Log::info('Request is validated');
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 400);
-        }
     
-        $member = Member::create($validator->validated());
+        $valdidated_request = $request->validated();
+        
+        Log::info('Validated request', ['validated_request' => $valdidated_request]);
+
+        $member = Member::create($valdidated_request);
 
         Log::info('Member created successfully', ['member' => $member]);
-
 
         return response()->json(['message' => 'Member created successfully!', 'member' => $member], 201);
     }
