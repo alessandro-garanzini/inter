@@ -14,14 +14,17 @@ services:
     tty: true
     restart: always
     ports:
-      - "9000:8000"
+      - "9001:8000"
     environment:
       DB_HOST: database
       DB_DATABASE: inter
       DB_USERNAME: interuser
       DB_PASSWORD: amala
+      APP_DEBUG: true
+      APP_ENV: 'local'
     volumes:
       - ./backend/src:/var/www/html
+      - /var/www/html/vendor
     depends_on:
       - database
     networks:
