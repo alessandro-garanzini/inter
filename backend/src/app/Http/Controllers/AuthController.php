@@ -2,28 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Log;
+
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+    public function login(Request $request){
+        $loginUserData = $request->validate([
+            'email'=>'required|string|email',
+            'password'=>'required|min:4'
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        Log::info(['user_data' => $loginUserData]);
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
+        $user = User::where('email',$loginUserData['email'])->first();
+        
+        Log::info(['user' => $user]);
+        
+        if(!$user || !Hash::check($loginUserData['password'],$user->password)){
+            return response()->json([
+                'message' => 'Invalid Credentials'
+            ],401);
         }
-
-        return $user->createToken('my-app-token')->plainTextToken;
+        $token = $user->createToken($user->name.'-AuthToken')->plainTextToken;
+        return response()->json([
+            'access_token' => $token,
+        ]);
     }
+
+    public function logout(Request $request)
+    {
+        // Prendi l'utente attualmente autenticato e revoca il suo token.
+        $request->user()->currentAccessToken()->delete();
+    
+        return response()->json(['message' => 'Logout successful']);
+    }
+    
 }
