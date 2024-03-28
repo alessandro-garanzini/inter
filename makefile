@@ -42,10 +42,12 @@ set_up:
 
 up_rebuilding: 
 	$(local_compose_up) $(BACKEND_SERVICE_NAME) --build
+	$(local_compose_up) $(FRONTEND_SERVICE_NAME) --build
 
 
 up: 
 	$(local_compose_up) $(BACKEND_SERVICE_NAME)
+	$(local_compose_up) $(FRONTEND_SERVICE_NAME)
 
 # LOCAL
 up_backend:

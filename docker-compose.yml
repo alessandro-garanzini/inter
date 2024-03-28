@@ -14,7 +14,7 @@ services:
     tty: true
     restart: always
     ports:
-      - "9001:8000"
+      - "1908:8000"
     environment:
       DB_HOST: database
       DB_DATABASE: inter
@@ -31,18 +31,20 @@ services:
       - inter-network
 
   
-  # frontend:
-  #   container_name: inter-frontend
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile
-  #   volumes:
-  #     - ./frontend/src:/app
-  #     - /app/node_modules
-  #   environment:
-  #     - DEBUG=True
-  #   networks:
-  #     - inter-network
+  frontend:
+    container_name: inter-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/src:/app
+      - /app/node_modules
+    ports:
+      - "3333:3000"
+    environment:
+      - DEBUG=True
+    networks:
+      - inter-network
 
   database:
     image: mariadb:10.5
