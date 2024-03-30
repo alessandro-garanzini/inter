@@ -16,7 +16,7 @@ export default function EditMember(context) {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:1908/api/members/${id}`)
+      fetch(`/api/members/${id}`)
         .then((response) => response.json())
         .then((data) => setMember(data));
     }
@@ -24,7 +24,7 @@ export default function EditMember(context) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await fetch(`http://localhost:1908/api/members/${id}`, {
+    const response = await fetch(`/api/members/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

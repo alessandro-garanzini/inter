@@ -1,72 +1,89 @@
-"use client"
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // Stato per il messaggio di errore
+  const router = useRouter(); // Crea un'istanza di useRouter
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage(""); // Resetta il messaggio di errore ad ogni tentativo
 
-    const response = await fetch('http://localhost:1908/api/login', {
-      method: 'POST',
+    const response = await fetch("/api/login", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest",
       },
       body: JSON.stringify({ email, password }),
     });
 
     if (response.ok) {
       console.log("Login successful!");
-    } else {
+      router.push('/dashboard')
+    } else if (response.status === 401) {
       console.log("Login failed!");
+      setErrorMessage("Credenziali errate!");
+    } else {
+      // Gestisci altri possibili stati di errore
+      console.log("Errore sconosciuto durante il login");
+      setErrorMessage("Si è verificato un errore. Riprova più tardi.");
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-300">
-      <img src="/logo.png" alt="Logo" className="mb-8" width={180} height={180} />
-      <h1 className='text-xl pb-4 text-black'>Inter user management</h1>
-      <div className="bg-gray-800 shadow-xl rounded-xl px-8 pt-6 pb-8 mb-4">
+    <div className="flex items-center justify-center min-h-screen bg-black">
+      {" "}
+      <div className="w-full max-w-xs">
+        <div className="flex items-center justify-center">
+        <img className="mb-5" src="logo.png" alt="" width={180} height={180} />
+        <p className="text-white font-bold mb-3 mt-3">INTER <br /> TEAM MANAGER</p>
+        </div>
         <form
+          className="bg-gray-100 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4"
           onSubmit={handleSubmit}
-          className="w-full max-w-xs"
         >
           <div className="mb-4">
-            <label htmlFor="email" className="block text-white text-sm font-bold mb-2">
-              Email
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              EMAIL
             </label>
             <input
-              type="email"
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow"
               id="email"
-              name="email"
-              required
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="mb-6">
-            <label htmlFor="password" className="block text-white text-sm font-bold mb-2">
-              Password
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              PASSWORD
             </label>
             <input
-              type="password"
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow"
               id="password"
-              name="password"
-              required
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          {errorMessage && (
+            <p className="text-blue-700 mb-3">{errorMessage}</p>
+          )}
           <div className="flex items-center justify-between">
             <button
+              className="bg-blue-900 hover:bg-black text-white  font-bold py-2 px-4 rounded focus:outline-none focus:shadow"
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             >
-              Login
+              ACCEDI
             </button>
           </div>
         </form>
+        <p className="text-center font-bold text-blue-700 text-xs">
+          &copy;2024 Alessandro Garanzini X INTER.
+        </p>
       </div>
     </div>
   );

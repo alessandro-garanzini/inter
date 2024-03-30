@@ -13,7 +13,7 @@ export default function Members() {
     const fetchMembers = async (page) => {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:1908/api/members?page=${page}`
+        `/api/members?page=${page}`
       );
       const data = await response.json();
       setMembers(data.data);
@@ -25,7 +25,7 @@ export default function Members() {
   }, [currentPage]);
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-300">
+    <div className="min-h-screen flex flex-col justify-center items-center bg-black">
       <img
         src="/logo.png"
         alt="Logo"
