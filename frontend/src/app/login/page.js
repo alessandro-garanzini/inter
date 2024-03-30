@@ -39,10 +39,6 @@ export default function Login() {
     <div className="flex items-center justify-center min-h-screen bg-black">
       {" "}
       <div className="w-full max-w-xs">
-        <div className="flex items-center justify-center">
-        <img className="mb-5" src="logo.png" alt="" width={180} height={180} />
-        <p className="text-white font-bold mb-3 mt-3">INTER <br /> TEAM MANAGER</p>
-        </div>
         <form
           className="bg-gray-100 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4"
           onSubmit={handleSubmit}

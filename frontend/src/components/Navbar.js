@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Navbar() {
   return (
     <nav className="bg-gray-100 shadow-lg">
@@ -6,7 +8,7 @@ export default function Navbar() {
           <div className="flex space-x-7">
             <div>
               <a href="/" className="flex items-center py-4 px-2">
-                <img src="logo.png" alt="" width={50} height={50} />
+                <Image src="/logo.png" alt="" width={50} height={50} />
               </a>
             </div>
             <div className="hidden md:flex items-center space-x-1">
