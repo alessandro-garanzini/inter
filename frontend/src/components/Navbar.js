@@ -1,10 +1,9 @@
 import Image from "next/image";
-import { cookies } from 'next/headers'
+import { cookies } from "next/headers";
 
 export default function Navbar() {
-  const cookieStore = cookies()
-  const auth_token = cookieStore.get('auth_token');
-  console.log(auth_token);
+  const cookieStore = cookies();
+  const auth_token = cookieStore.get("auth_token");
 
   return (
     <nav className="bg-gray-100 shadow-lg">
@@ -25,19 +24,8 @@ export default function Navbar() {
               </a>
             </div>
           </div>
-          <div className="hidden md:flex items-center space-x-3">
-            {auth_token ? (
-              <a href="/logout" className="py-2 px-2 font-medium text-blue-700 hover:text-black hover:border-b-2 hover:border-black transition duration-300">
-                LOG OUT
-              </a>
-            ) : (
-              <a href="/login" className="py-2 px-2 font-medium text-blue-700 hover:text-black hover:border-b-2 hover:border-black transition duration-300">
-                LOG IN
-              </a>
-            )}
-          </div>
-          </div>
         </div>
+      </div>
     </nav>
   );
 }
