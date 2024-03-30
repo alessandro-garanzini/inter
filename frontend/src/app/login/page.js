@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import ToolLogo from "../../components/ToolLogo";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -17,7 +18,6 @@ export default function Login() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-Requested-With": "XMLHttpRequest",
       },
       body: JSON.stringify({ email, password }),
     });
@@ -37,8 +37,8 @@ export default function Login() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-black">
-      {" "}
       <div className="w-full max-w-xs">
+      <ToolLogo />
         <form
           className="bg-gray-100 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4"
           onSubmit={handleSubmit}

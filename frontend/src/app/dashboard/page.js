@@ -67,7 +67,7 @@ export default function Members() {
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   <Link
                     href={`/members/edit/${member.id}`}
-                    className="bg-blue-900 hover:bg-black text-white  font-bold py-2 px-4"
+                    className="bg-blue-900 hover:bg-black text-white  font-bold py-2 px-4 transition duration-300"
                   >
                     MODIFICA
                   </Link>

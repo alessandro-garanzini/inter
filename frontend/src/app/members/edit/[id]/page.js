@@ -2,7 +2,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import ToolLogo from '../../../../components/ToolLogo'
+import ToolLogo from "../../../../components/ToolLogo";
+import Link from "next/link";
 
 export default function EditMember(context) {
   const params = useParams();
@@ -49,7 +50,9 @@ export default function EditMember(context) {
     <div className="min-h-screen flex flex-col justify-center items-center bg-black">
       <ToolLogo />
       <div className="max-w-xl mx-auto mt-10">
-        <h2 className="text-2xl text-white font-semibold mb-6">MODIFICA TEAM MEMBER</h2>
+        <h2 className="text-2xl text-white font-semibold mb-6">
+          MODIFICA TEAM MEMBER
+        </h2>
         <form
           onSubmit={handleSubmit}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
@@ -120,7 +123,7 @@ export default function EditMember(context) {
           </div>
           <div className="flex items-center justify-between">
             <button
-              className="bg-blue-900 hover:bg-black text-white  font-bold py-2 px-4"
+              className="bg-blue-900 hover:bg-black text-white  font-bold py-2 px-4 transition duration-300"
               type="submit"
             >
               AGGIORNA
@@ -128,6 +131,12 @@ export default function EditMember(context) {
           </div>
         </form>
       </div>
+      <Link
+        href="/"
+        className="bg-white text-blue-900 hover:bg-blue-900 hover:text-white  mt-3 font-bold py-2 px-4 transition duration-300"
+      >
+        TORNA ALLA DASHBOARD
+      </Link>
     </div>
   );
 }
