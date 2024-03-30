@@ -1,18 +1,15 @@
 "use client";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
 import ToolLogo from "../../components/ToolLogo";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(""); // Stato per il messaggio di errore
-  const router = useRouter(); // Crea un'istanza di useRouter
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage(""); // Resetta il messaggio di errore ad ogni tentativo
+    setErrorMessage("");
 
     const response = await fetch("/api/login", {
       method: "POST",
@@ -24,12 +21,12 @@ export default function Login() {
 
     if (response.ok) {
       console.log("Login successful!");
-      router.push('/dashboard')
+      //uso windows.location.href al posto di router.push perché voglio rimontare la navbar
+      window.location.href = '/dashboard';
     } else if (response.status === 401) {
       console.log("Login failed!");
       setErrorMessage("Credenziali errate!");
     } else {
-      // Gestisci altri possibili stati di errore
       console.log("Errore sconosciuto durante il login");
       setErrorMessage("Si è verificato un errore. Riprova più tardi.");
     }
