@@ -43,11 +43,13 @@ set_up:
 up_rebuilding: 
 	$(local_compose_up) $(BACKEND_SERVICE_NAME) --build
 	$(local_compose_up) $(FRONTEND_SERVICE_NAME) --build
+	$(local_compose_up) nginx
 
 
 up: 
 	$(local_compose_up) $(BACKEND_SERVICE_NAME)
 	$(local_compose_up) $(FRONTEND_SERVICE_NAME)
+	$(local_compose_up) nginx
 
 # LOCAL
 up_backend:
