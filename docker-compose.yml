@@ -62,6 +62,19 @@ services:
     networks:
       - inter-network
 
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - frontend
+      - backend
+      - database
+    networks:
+      - inter-network
+
 networks:
   inter-network:
     driver: bridge
