@@ -19,7 +19,7 @@ class MemberController extends Controller
      */
     public function index()
     {
-    $members = Member::paginate(10); // Modifica il numero per adattarlo alle tue esigenze
+    $members = Member::orderBy('id', 'desc')->paginate(15); 
     return response()->json($members);
     }
 
