@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Cookie;
 
 class AuthController extends Controller
 {
@@ -28,17 +28,20 @@ class AuthController extends Controller
             ],401);
         }
         $token = $user->createToken($user->name.'-AuthToken')->plainTextToken;
+        $cookie = cookie('auth_token', $token, 60 * 24, null, null, true, true);
+
         return response()->json([
-            'access_token' => $token,
-        ]);
+            'message' => 'Login successful',
+        ])->withCookie($cookie); 
     }
 
     public function logout(Request $request)
     {
-        // Prendi l'utente attualmente autenticato e revoca il suo token.
         $request->user()->currentAccessToken()->delete();
-    
-        return response()->json(['message' => 'Logout successful']);
+        
+        $cookie = Cookie::forget('auth_token');
+        
+        return response()->json(['message' => 'Logout successful'])->withCookie($cookie);
     }
     
 }
