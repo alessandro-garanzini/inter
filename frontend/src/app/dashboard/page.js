@@ -52,7 +52,7 @@ export default function Members() {
               <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Ruolo
               </th>
-              <th className="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+              <th className=" py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                 Azioni
               </th>
             </tr>
@@ -72,12 +72,18 @@ export default function Members() {
                 <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                   {member.role}
                 </td>
-                <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                <td className="py-5 border-b border-gray-200 bg-white text-sm">
                   <Link
                     href={`/members/edit/${member.id}`}
                     className="bg-blue-900 hover:bg-black text-white  font-bold py-2 px-4 transition duration-300"
                   >
                     MODIFICA
+                  </Link>
+                  <Link
+                    href={`/`}
+                    className="bg-red-700 hover:bg-black text-white  font-bold ml-4 py-2 px-4 transition duration-300"
+                  >
+                    ELIMINA
                   </Link>
                 </td>
               </tr>
