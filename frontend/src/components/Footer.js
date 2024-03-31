@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="bg-white text-blue-800 text-center p-4">
+    <footer className="bg-white text-blue-800 text-center pb-4">
       <p className="text-sm">
         The literal and graphical information presented on this website,
         including images and text, is copyright FC Internazionale. <br />
