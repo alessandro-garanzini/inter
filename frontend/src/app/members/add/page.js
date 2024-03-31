@@ -20,6 +20,7 @@ export default function CreateMember() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "X-Requested-With":"XMLHttpRequest"
       },
       body: JSON.stringify(member),
     });
@@ -42,17 +43,21 @@ export default function CreateMember() {
 
     return (
       <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-        <div className="bg-white p-4 rounded">
-          <h2>Membro Creato</h2>
-          <p>Il nuovo membro è stato creato con successo.</p>
+        <div className="bg-white p-4">
+          <p className="font-bold mt-5 mb-5">
+            Il team member é stato aggiunto con successo.
+          </p>
           <Link
             href="/"
             className="bg-blue-900 text-white hover:bg-black mt-3 font-bold py-2 px-4 transition duration-300"
           >
-            Torna alla Dashboard
+            TORNA ALLA DASHBOARD
           </Link>
-          <button onClick={onClose} className="ml-4">
-            Chiudi
+          <button
+            onClick={onClose}
+            className="bg-black text-white font-bold ml-4 py-2 px-4"
+          >
+            CHIUDI
           </button>
         </div>
       </div>
