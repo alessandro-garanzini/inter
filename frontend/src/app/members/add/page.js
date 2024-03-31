@@ -1,0 +1,141 @@
+"use client";
+import { useState } from "react";
+import ToolLogo from "../../../components/ToolLogo";
+import Link from "next/link";
+
+export default function CreateMember() {
+  const [member, setMember] = useState({
+    name: "",
+    email: "",
+    birthdate: "",
+    role: "",
+  });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const response = await fetch(`/api/members`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(member),
+    });
+
+    if (response.ok) {
+      setIsModalOpen(true);
+      console.log("Membro creato!");
+    } else {
+      console.error("Errore nella creazione del membro");
+    }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setMember({ ...member, [name]: value });
+  };
+
+  const Modal = ({ isOpen, onClose }) => {
+    if (!isOpen) return null;
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div className="bg-white p-4 rounded">
+          <h2>Membro Creato</h2>
+          <p>Il nuovo membro è stato creato con successo.</p>
+          <Link
+            href="/"
+            className="bg-blue-900 text-white hover:bg-black mt-3 font-bold py-2 px-4 transition duration-300"
+          >
+            Torna alla Dashboard
+          </Link>
+          <button onClick={onClose} className="ml-4">Chiudi</button>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col justify-center items-center bg-black">
+      <ToolLogo />
+      <div className="max-w-xl mx-auto mt-10">
+        <h2 className="text-2xl text-white font-semibold mb-6">
+          CREA NUOVO TEAM MEMBER
+        </h2>
+        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          {/* Nome */}
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+              Nome:
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              id="name"
+              name="name"
+              value={member.name}
+              onChange={handleChange}
+            />
+          </div>
+          {/* Email */}
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+              Email:
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="email"
+              id="email"
+              name="email"
+              value={member.email}
+              onChange={handleChange}
+            />
+          </div>
+          {/* Data di Nascita */}
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="birthdate">
+              Data di Nascita:
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="date"
+              id="birthdate"
+              name="birthdate"
+              value={member.birthdate}
+              onChange={handleChange}
+            />
+          </div>
+          {/* Ruolo */}
+          <div className="mb-6">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="role">
+              Ruolo:
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              id="role"
+              name="role"
+              value={member.role}
+              onChange={handleChange}
+            />
+          </div>
+          {/* Pulsante di Invio */}
+          <div className="flex items-center justify-between">
+            <button
+              className="bg-blue-900 hover:bg-black text-white font-bold py-2 px-4 transition duration-300"
+              type="submit"
+            >
+              CREA
+            </button>
+          </div>
+        </form>
+      </div>
+      <Link href="/" className="bg-white text-blue-900 hover:bg-blue-900 hover:text-white mt-3 font-bold py-2 px-4 transition duration-300">
+        TORNA ALLA DASHBOARD
+      </Link>
+      {/* Modale di conferma */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+    </div>
+  );
+}
