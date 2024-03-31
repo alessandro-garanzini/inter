@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import ToolLogo from "../../../components/ToolLogo";
 import Link from "next/link";
@@ -50,7 +51,9 @@ export default function CreateMember() {
           >
             Torna alla Dashboard
           </Link>
-          <button onClick={onClose} className="ml-4">Chiudi</button>
+          <button onClick={onClose} className="ml-4">
+            Chiudi
+          </button>
         </div>
       </div>
     );
@@ -63,10 +66,15 @@ export default function CreateMember() {
         <h2 className="text-2xl text-white font-semibold mb-6">
           CREA NUOVO TEAM MEMBER
         </h2>
-        <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          {/* Nome */}
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        >
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="name"
+            >
               Nome:
             </label>
             <input
@@ -78,9 +86,11 @@ export default function CreateMember() {
               onChange={handleChange}
             />
           </div>
-          {/* Email */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="email"
+            >
               Email:
             </label>
             <input
@@ -92,9 +102,11 @@ export default function CreateMember() {
               onChange={handleChange}
             />
           </div>
-          {/* Data di Nascita */}
           <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="birthdate">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="birthdate"
+            >
               Data di Nascita:
             </label>
             <input
@@ -106,9 +118,11 @@ export default function CreateMember() {
               onChange={handleChange}
             />
           </div>
-          {/* Ruolo */}
           <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="role">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="role"
+            >
               Ruolo:
             </label>
             <input
@@ -120,7 +134,6 @@ export default function CreateMember() {
               onChange={handleChange}
             />
           </div>
-          {/* Pulsante di Invio */}
           <div className="flex items-center justify-between">
             <button
               className="bg-blue-900 hover:bg-black text-white font-bold py-2 px-4 transition duration-300"
@@ -131,10 +144,12 @@ export default function CreateMember() {
           </div>
         </form>
       </div>
-      <Link href="/" className="bg-white text-blue-900 hover:bg-blue-900 hover:text-white mt-3 font-bold py-2 px-4 transition duration-300">
+      <Link
+        href="/"
+        className="bg-white text-blue-900 hover:bg-blue-900 hover:text-white mt-3 font-bold py-2 px-4 transition duration-300"
+      >
         TORNA ALLA DASHBOARD
       </Link>
-      {/* Modale di conferma */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );

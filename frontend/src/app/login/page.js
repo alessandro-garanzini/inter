@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import ToolLogo from "../../components/ToolLogo";
 
@@ -20,14 +21,11 @@ export default function Login() {
     });
 
     if (response.ok) {
-      console.log("Login successful!");
       //uso windows.location.href al posto di router.push perché voglio rimontare la navbar
-      window.location.href = '/dashboard';
+      window.location.href = "/dashboard";
     } else if (response.status === 401) {
-      console.log("Login failed!");
       setErrorMessage("Credenziali errate!");
     } else {
-      console.log("Errore sconosciuto durante il login");
       setErrorMessage("Si è verificato un errore. Riprova più tardi.");
     }
   };
@@ -35,7 +33,7 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-black">
       <div className="w-full max-w-xs">
-      <ToolLogo />
+        <ToolLogo />
         <form
           className="bg-gray-100 shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4"
           onSubmit={handleSubmit}
@@ -62,9 +60,7 @@ export default function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          {errorMessage && (
-            <p className="text-blue-700 mb-3">{errorMessage}</p>
-          )}
+          {errorMessage && <p className="text-blue-700 mb-3">{errorMessage}</p>}
           <div className="flex items-center justify-between">
             <button
               className="bg-blue-900 hover:bg-black text-white  font-bold py-2 px-4 rounded focus:outline-none focus:shadow"

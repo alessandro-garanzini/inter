@@ -1,8 +1,9 @@
-// pages/members.js
 "use client";
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import ToolLogo from "../../components/ToolLogo";
+
 export default function Members() {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -26,16 +27,16 @@ export default function Members() {
     <div className="min-h-screen flex flex-col justify-center items-center pt-10 mb-5 bg-black">
       <ToolLogo />
       <h2 className="text-2xl text-white font-semibold mb-6">TEAM DASHBOARD</h2>
-      
+
       <div className="container mx-auto p-4">
-      <div className="flex flex-col items-end justify-end mb-5">
-        <Link
-          href={`/members/add`}
-          className="bg-white text-blue-800 hover:bg-blue-900 hover:text-white  font-bold py-2 px-4 transition duration-300"
-        >
-          AGGIUNGI TEAM MEMBER
-        </Link>
-      </div>
+        <div className="flex flex-col items-end justify-end mb-5">
+          <Link
+            href={`/members/add`}
+            className="bg-white text-blue-800 hover:bg-blue-900 hover:text-white  font-bold py-2 px-4 transition duration-300"
+          >
+            AGGIUNGI TEAM MEMBER
+          </Link>
+        </div>
         <table className="min-w-full rounded-lg table-auto shadow-2xl">
           <thead>
             <tr>
