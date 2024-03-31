@@ -66,7 +66,7 @@ export default function Login() {
           {errorMessage && <p className="text-blue-700 mb-3">{errorMessage}</p>}
           <div className="flex items-center justify-between">
             <button
-              className="bg-blue-900 hover:bg-black text-white  font-bold py-2 px-4 rounded focus:outline-none focus:shadow"
+              className="bg-blue-900 hover:bg-black text-white  font-bold py-2 px-4 focus:outline-none focus:shadow transition duration-300"
               type="submit"
             >
               ACCEDI
