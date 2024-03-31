@@ -89,6 +89,7 @@ export default function CreateMember() {
               name="name"
               value={member.name}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="mb-4">
@@ -105,6 +106,7 @@ export default function CreateMember() {
               name="email"
               value={member.email}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="mb-4">
@@ -121,6 +123,7 @@ export default function CreateMember() {
               name="birthdate"
               value={member.birthdate}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="mb-6">
@@ -137,6 +140,7 @@ export default function CreateMember() {
               name="role"
               value={member.role}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="flex items-center justify-between">

@@ -101,6 +101,7 @@ export default function EditMember(context) {
               name="name"
               value={member.name}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="mb-4">
@@ -117,6 +118,7 @@ export default function EditMember(context) {
               name="email"
               value={member.email}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="mb-4">
@@ -133,6 +135,7 @@ export default function EditMember(context) {
               name="birthdate"
               value={member.birthdate}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="mb-6">
@@ -149,6 +152,7 @@ export default function EditMember(context) {
               name="role"
               value={member.role}
               onChange={handleChange}
+              required
             />
           </div>
           <div className="flex items-center justify-between">

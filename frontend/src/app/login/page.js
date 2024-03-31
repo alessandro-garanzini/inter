@@ -48,6 +48,7 @@ export default function Login() {
               id="email"
               type="text"
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div className="mb-6">
@@ -59,6 +60,7 @@ export default function Login() {
               id="password"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
           </div>
           {errorMessage && <p className="text-blue-700 mb-3">{errorMessage}</p>}
