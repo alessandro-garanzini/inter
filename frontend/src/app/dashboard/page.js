@@ -23,6 +23,28 @@ export default function Members() {
     fetchMembers(currentPage);
   }, [currentPage]);
 
+  const deleteMember = async (id) => {
+    if (confirm("Sei sicuro di voler eliminare questo membro?")) {
+      try {
+        const response = await fetch(`/api/members/${id}/`, {
+          method: "DELETE",
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Errore durante l'eliminazione del membro");
+        }
+
+        setMembers(members.filter((member) => member.id !== id));
+      } catch (error) {
+        console.error("Errore durante l'eliminazione:", error);
+        alert("Errore durante l'eliminazione del membro");
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col justify-center items-center pt-10 mb-5 bg-black">
       <ToolLogo />
@@ -79,12 +101,12 @@ export default function Members() {
                   >
                     MODIFICA
                   </Link>
-                  <Link
-                    href={`/`}
-                    className="bg-red-700 hover:bg-black text-white  font-bold ml-4 py-2 px-4 transition duration-300"
+                  <button
+                    onClick={() => deleteMember(member.id)}
+                    className="bg-red-700 hover:bg-black text-white font-bold ml-4 py-2 px-4 transition duration-300 cursor-pointer"
                   >
                     ELIMINA
-                  </Link>
+                  </button>
                 </td>
               </tr>
             ))}
