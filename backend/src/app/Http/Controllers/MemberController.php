@@ -19,8 +19,8 @@ class MemberController extends Controller
      */
     public function index()
     {
-    $members = Member::orderBy('id', 'desc')->paginate(15); 
-    return response()->json($members);
+        $members = Member::orderBy('id', 'desc')->paginate(15);
+        return response()->json($members);
     }
 
     /**
@@ -30,7 +30,6 @@ class MemberController extends Controller
      */
     public function create()
     {
- 
     }
 
     /**
@@ -42,7 +41,7 @@ class MemberController extends Controller
     public function store(MemberPostRequest $request)
     {
         $valdidated_request = $request->validated();
-        
+
         $member = Member::create($valdidated_request);
 
         Log::info('Member created successfully', ['member' => $member]);
@@ -83,8 +82,8 @@ class MemberController extends Controller
     {
         $member = Member::findOrFail($id);
         $member->update($request->validated());
-    
-        return response()->json(['message' => 'Member updated successfully', 'member' => $member]);    
+
+        return response()->json(['message' => 'Member updated successfully', 'member' => $member]);
     }
 
     /**
@@ -95,6 +94,19 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        $member = Member::find($id);
+
+        if (!$member) {
+            return response()->json(['error' => 'member not found.'], 404);
+        }
+
+        try {
+            $member->delete();
+
+            return response()->json(['success' => 'member deleted successfully.'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to delete the member.'], 500);
+        }
     }
 }
