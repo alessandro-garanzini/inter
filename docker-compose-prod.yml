@@ -1,0 +1,80 @@
+version: '3.8'
+
+volumes:
+  dbdata:
+    driver: local
+
+services:
+  backend:
+    container_name: inter-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    restart: always
+    ports:
+      - "1908:8000"
+    environment:
+      DB_HOST: database
+      DB_DATABASE: inter
+      DB_USERNAME: interuser
+      DB_PASSWORD: amala
+      APP_DEBUG: 'true'
+      APP_ENV: 'local'
+    volumes:
+      - ./backend/src:/var/www/html
+      - /var/www/html/vendor
+    depends_on:
+      - database
+    networks:
+      - inter-network
+
+  
+  frontend:
+    container_name: inter-frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    volumes:
+      - ./frontend/src:/app
+      - /app/node_modules
+    ports:
+      - "3333:3000"
+    environment:
+      - DEBUG=True
+    networks:
+      - inter-network
+
+  database:
+    image: mariadb:10.5
+    container_name: inter-database
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: inter
+      MYSQL_USER: interuser
+      MYSQL_PASSWORD: amala
+      MYSQL_ROOT_PASSWORD: amala
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - inter-network
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - frontend
+      - backend
+      - database
+    networks:
+      - inter-network
+
+networks:
+  inter-network:
+    driver: bridge
