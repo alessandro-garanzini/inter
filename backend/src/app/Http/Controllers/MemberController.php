@@ -56,7 +56,7 @@ class MemberController extends Controller
         
         $email_receiver_address = $request->email;
         $member_name = $request->name;
-        $mail_message = "Dear ".$member_name.",\n"."Weilcome to INTER!\nBest regards\nInter Team Manager";
+        $mail_message = "Dear ".$member_name.",\n"."Welcome to INTER!\nBest regards\nInter Team Manager";
 
         $result = $client->sendMessage([
             'QueueUrl' => 'https://sqs.eu-west-3.amazonaws.com/533267403010/inter-queue',
