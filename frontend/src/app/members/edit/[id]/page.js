@@ -17,6 +17,7 @@ export default function EditMember(context) {
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (id) {
@@ -42,6 +43,7 @@ export default function EditMember(context) {
       console.log("Utente aggiornato!");
     } else {
       console.error("Errore nell'aggiornamento dell'utente");
+      setErrorMessage("Si è verificato un errore");
     }
   };
 
@@ -88,6 +90,7 @@ export default function EditMember(context) {
           onSubmit={handleSubmit}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
+          {errorMessage && <p className="text-blue-700 mb-3">{errorMessage}</p>}
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"

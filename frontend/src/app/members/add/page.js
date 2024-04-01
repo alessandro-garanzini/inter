@@ -13,9 +13,12 @@ export default function CreateMember() {
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setErrorMessage("");
+
     const response = await fetch(`/api/members`, {
       method: "POST",
       headers: {
@@ -30,6 +33,7 @@ export default function CreateMember() {
       console.log("Membro creato!");
     } else {
       console.error("Errore nella creazione del membro");
+      setErrorMessage("Si è verificato un errore");
     }
   };
 
@@ -75,6 +79,7 @@ export default function CreateMember() {
           onSubmit={handleSubmit}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
         >
+          {errorMessage && <p className="text-blue-700 mb-3">{errorMessage}</p>}
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
