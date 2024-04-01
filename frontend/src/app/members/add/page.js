@@ -19,6 +19,7 @@ export default function CreateMember() {
     event.preventDefault();
     setErrorMessage("");
 
+    if (confirm("Sei sicuro di voler aggiungere questo team member? Verrá inviata una email a: "+member.email)) {
     const response = await fetch(`/api/members`, {
       method: "POST",
       headers: {
@@ -35,6 +36,7 @@ export default function CreateMember() {
       console.error("Errore nella creazione del membro");
       setErrorMessage("Si è verificato un errore");
     }
+  }
   };
 
   const handleChange = (e) => {
