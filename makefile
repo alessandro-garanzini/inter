@@ -93,6 +93,8 @@ stop:
 down:
 	$(local_compose_cmd) down
 
+down_prod_linux:
+	$(local_compose_cmd_prod_linux) down
 
 ###################
 ####  Laravel  ####
