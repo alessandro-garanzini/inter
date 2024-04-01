@@ -4,9 +4,18 @@
 
 # Docker Compose local
 compose_base_cmd = docker compose -f 
+compose_base_cmd_linux = docker-compose -f 
+
 local_compose_file = docker-compose.yml
+local_compose_file_prod = docker-compose-prod.yml
+
 local_compose_cmd = $(compose_base_cmd) $(local_compose_file)
+local_compose_cmd_prod = $(compose_base_cmd) $(local_compose_file_prod)
+local_compose_cmd_prod_linux = $(compose_base_cmd_linux) $(local_compose_file_prod)
+
 local_compose_up = $(local_compose_cmd) up -d
+local_compose_up_prod = $(local_compose_cmd_prod) up -d
+local_compose_up_prod_linux = $(local_compose_cmd_prod_linux) up -d
 
 # Docker
 docker_exec_base_cmd = docker exec
@@ -45,6 +54,15 @@ up_rebuilding:
 	$(local_compose_up) $(FRONTEND_SERVICE_NAME) --build
 	$(local_compose_up) nginx
 
+prod_up_rebuilding: 
+	$(local_compose_up_prod) $(BACKEND_SERVICE_NAME) --build
+	$(local_compose_up_prod) $(FRONTEND_SERVICE_NAME) --build
+	$(local_compose_up_prod) nginx
+
+linux_prod_up_rebuilding: 
+	$(local_compose_up_prod_linux) $(BACKEND_SERVICE_NAME) --build
+	$(local_compose_up_prod_linux) $(FRONTEND_SERVICE_NAME) --build
+	$(local_compose_up_prod_linux) nginx
 
 up: 
 	$(local_compose_up) $(BACKEND_SERVICE_NAME)
