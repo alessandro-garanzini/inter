@@ -11,7 +11,7 @@ COPY src/package*.json ./
 RUN npm install --only=production
 
 # Copiare il resto dei file del progetto
-COPY .. .
+COPY src/ .
 
 # Costruire l'app per la produzione
 RUN npm run build
