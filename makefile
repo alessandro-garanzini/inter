@@ -60,8 +60,8 @@ prod_up_rebuilding:
 	$(local_compose_up_prod) nginx
 
 linux_prod_up_rebuilding: 
-	$(local_compose_up_prod_linux) $(BACKEND_SERVICE_NAME) --build
-	$(local_compose_up_prod_linux) $(FRONTEND_SERVICE_NAME) --build
+	$(local_compose_up_prod_linux) --build $(BACKEND_SERVICE_NAME)
+	$(local_compose_up_prod_linux) --build $(FRONTEND_SERVICE_NAME)
 	$(local_compose_up_prod_linux) nginx
 
 up: 
