@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Aws\Sqs\SqsClient;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
 
 use App\Http\Requests\MemberPostRequest;
 use App\Http\Requests\MemberUpdateRequest;
@@ -45,6 +44,29 @@ class MemberController extends Controller
         $member = Member::create($valdidated_request);
 
         Log::info('Member created successfully', ['member' => $member]);
+
+        $client = new SqsClient([
+            'version' => 'latest',
+            'region'  => env('AWS_DEFAULT_REGION'),
+            'credentials' => [
+                'key'    => env('AWS_ACCESS_KEY_ID'),
+                'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            ],
+        ]);
+        
+        $email_receiver_address = $request->email;
+        $member_name = $request->name;
+        $mail_message = "Dear ".$member_name.",\n"."Weilcome to INTER!\nBest regards\nInter Team Manager";
+
+        $result = $client->sendMessage([
+            'QueueUrl' => 'https://sqs.eu-west-3.amazonaws.com/533267403010/inter-queue',
+            'MessageBody' => json_encode([
+                'email' => $email_receiver_address,
+                'message' => $mail_message,
+            ]),
+        ]);
+
+        Log::info('SQS message sent', ['result' => $result]);
 
         return response()->json(['message' => 'Member created successfully!', 'member' => $member], 201);
     }
