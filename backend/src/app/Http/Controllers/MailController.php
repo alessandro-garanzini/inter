@@ -17,10 +17,9 @@ class MailController extends Controller
         $email = $request->input('email');
         $messageBody = $request->input('message');
 
-        // Invio dell'email
         Mail::raw($messageBody, function ($message) use ($email) {
             $message->to($email)
-                    ->subject('Benvenuto in INTER');
+                    ->subject('Welcome to INTER');
         });
 
         return response()->json(['message' => 'Email inviata con successo!']);
