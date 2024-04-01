@@ -166,7 +166,7 @@ export default function EditMember(context) {
         </form>
       </div>
       <Link
-        href="/"
+        href="/dashboard"
         className="bg-white text-blue-900 hover:bg-blue-900 hover:text-white  mt-3 font-bold py-2 px-4 transition duration-300"
       >
         TORNA ALLA DASHBOARD
