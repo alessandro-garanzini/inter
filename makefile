@@ -116,7 +116,7 @@ down_prod_linux:
 	$(local_compose_cmd_prod_linux) down
 
 up_prod_linux_frontend_rebuilding:
-	$(local_compose_up_prod) $(FRONTEND_SERVICE_NAME) --build
+	$(local_compose_up_prod_linux) --build $(FRONTEND_SERVICE_NAME)
 
 ###################
 ####  Laravel  ####
