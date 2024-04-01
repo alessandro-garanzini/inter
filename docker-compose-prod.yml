@@ -35,7 +35,7 @@ services:
     container_name: inter-frontend
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: prod.Dockerfile
     volumes:
       - ./frontend/src:/app
       - /app/node_modules
