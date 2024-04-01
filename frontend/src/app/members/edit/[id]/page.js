@@ -171,7 +171,7 @@ export default function EditMember(context) {
       </div>
       <Link
         href="/"
-        className="bg-white text-blue-900 hover:bg-blue-900 hover:text-white mt-3 font-bold py-2 px-4 transition duration-300"
+        className="bg-white text-blue-900 hover:bg-blue-900 hover:text-white mt-3 mb-3 font-bold py-2 px-4 transition duration-300"
       >
         TORNA ALLA DASHBOARD
       </Link>
