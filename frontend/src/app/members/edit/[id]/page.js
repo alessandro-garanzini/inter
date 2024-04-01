@@ -32,7 +32,7 @@ export default function EditMember(context) {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "X-Requested-With":"XMLHttpRequest"
+        "X-Requested-With": "XMLHttpRequest",
       },
       body: JSON.stringify(member),
     });
@@ -57,14 +57,15 @@ export default function EditMember(context) {
       <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
         <div className="bg-white p-4">
           <p className="font-bold mt-5 mb-5">
-            La modifica è stata salvata con successo.
+            Il team member é stato modificato con successo.
           </p>
-          <Link
+          {/* Using <a></a> instead of <Link> because I had a strange behaviour in production */}
+          <a
             href="/"
             className="bg-blue-900 text-white hover:bg-black mt-3 font-bold py-2 px-4 transition duration-300"
           >
             TORNA ALLA DASHBOARD
-          </Link>
+          </a>
           <button
             onClick={onClose}
             className="bg-black text-white font-bold ml-4 py-2 px-4"
@@ -166,8 +167,8 @@ export default function EditMember(context) {
         </form>
       </div>
       <Link
-        href="/dashboard"
-        className="bg-white text-blue-900 hover:bg-blue-900 hover:text-white  mt-3 font-bold py-2 px-4 transition duration-300"
+        href="/"
+        className="bg-white text-blue-900 hover:bg-blue-900 hover:text-white mt-3 font-bold py-2 px-4 transition duration-300"
       >
         TORNA ALLA DASHBOARD
       </Link>
