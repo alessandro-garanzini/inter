@@ -65,6 +65,7 @@ services:
     image: nginx:alpine
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./nginx-prod:/etc/nginx/conf.d
       - /etc/letsencrypt:/etc/letsencrypt
