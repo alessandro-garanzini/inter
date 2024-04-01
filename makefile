@@ -54,11 +54,6 @@ up_rebuilding:
 	$(local_compose_up) $(FRONTEND_SERVICE_NAME) --build
 	$(local_compose_up) nginx
 
-linux_prod_up_rebuilding: 
-	$(local_compose_up_prod_linux) --build $(BACKEND_SERVICE_NAME)
-	$(local_compose_up_prod_linux) --build $(FRONTEND_SERVICE_NAME)
-	$(local_compose_up_prod_linux) nginx
-
 up: 
 	$(local_compose_up) $(BACKEND_SERVICE_NAME)
 	$(local_compose_up) $(FRONTEND_SERVICE_NAME)
@@ -89,9 +84,6 @@ down:
 	$(local_compose_cmd) down
 
 
-down_prod_linux:
-	$(local_compose_cmd_prod_linux) down
-
 # PROD
 up_prod: 
 	$(local_compose_up_prod) $(BACKEND_SERVICE_NAME)
@@ -105,6 +97,23 @@ up_prod_rebuilding:
 	$(local_compose_up_prod) $(BACKEND_SERVICE_NAME) --build
 	$(local_compose_up_prod) $(FRONTEND_SERVICE_NAME) --build
 	$(local_compose_up_prod) nginx
+
+up_prod_frontend_rebuilding:
+	$(local_compose_up_prod) $(FRONTEND_SERVICE_NAME) --build
+
+# PROD LINUX
+up_prod_linux: 
+	$(local_compose_up_prod_linux) $(BACKEND_SERVICE_NAME)
+	$(local_compose_up_prod_linux) $(FRONTEND_SERVICE_NAME)
+	$(local_compose_up_prod_linux) nginx
+
+linux_prod_up_rebuilding: 
+	$(local_compose_up_prod_linux) --build $(BACKEND_SERVICE_NAME)
+	$(local_compose_up_prod_linux) --build $(FRONTEND_SERVICE_NAME)
+	$(local_compose_up_prod_linux) nginx
+
+down_prod_linux:
+	$(local_compose_cmd_prod_linux) down
 
 up_prod_frontend_rebuilding:
 	$(local_compose_up_prod) $(FRONTEND_SERVICE_NAME) --build
