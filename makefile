@@ -115,7 +115,7 @@ linux_prod_up_rebuilding:
 down_prod_linux:
 	$(local_compose_cmd_prod_linux) down
 
-up_prod_frontend_rebuilding:
+up_prod_linux_frontend_rebuilding:
 	$(local_compose_up_prod) $(FRONTEND_SERVICE_NAME) --build
 
 ###################
