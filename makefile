@@ -54,11 +54,6 @@ up_rebuilding:
 	$(local_compose_up) $(FRONTEND_SERVICE_NAME) --build
 	$(local_compose_up) nginx
 
-prod_up_rebuilding: 
-	$(local_compose_up_prod) $(BACKEND_SERVICE_NAME) --build
-	$(local_compose_up_prod) $(FRONTEND_SERVICE_NAME) --build
-	$(local_compose_up_prod) nginx
-
 linux_prod_up_rebuilding: 
 	$(local_compose_up_prod_linux) --build $(BACKEND_SERVICE_NAME)
 	$(local_compose_up_prod_linux) --build $(FRONTEND_SERVICE_NAME)
@@ -93,8 +88,26 @@ stop:
 down:
 	$(local_compose_cmd) down
 
+
 down_prod_linux:
 	$(local_compose_cmd_prod_linux) down
+
+# PROD
+up_prod: 
+	$(local_compose_up_prod) $(BACKEND_SERVICE_NAME)
+	$(local_compose_up_prod) $(FRONTEND_SERVICE_NAME)
+	$(local_compose_up_prod) nginx
+
+down_prod:
+	$(local_compose_cmd_prod) down
+
+up_prod_rebuilding: 
+	$(local_compose_up_prod) $(BACKEND_SERVICE_NAME) --build
+	$(local_compose_up_prod) $(FRONTEND_SERVICE_NAME) --build
+	$(local_compose_up_prod) nginx
+
+up_prod_frontend_rebuilding:
+	$(local_compose_up_prod) $(FRONTEND_SERVICE_NAME) --build
 
 ###################
 ####  Laravel  ####
